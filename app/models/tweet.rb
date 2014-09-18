@@ -5,12 +5,15 @@ class Tweet < ActiveRecord::Base
 
   belongs_to :user
 
-  scope :search_for_user, -> (@user) { where("status = ?", params )}
+  after_create :search_for_user
 
-  after_create :send_notification
+  def search_for_user
+    User.all.each do |user|
+      if self.status.include?("*" + user.email)
+        UserMailer.have_been_tweeted(user, self.user.email).deliver
+      end
 
-  def send_notification
-    UserMailer.have_been_tweeted
+    end
   end
-  # @tweet.search_for_user.deliver
+
 end

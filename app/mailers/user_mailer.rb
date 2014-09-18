@@ -11,8 +11,9 @@ class UserMailer < ActionMailer::Base
     mail to: user.email, subject: "Sign Up Confirmation"
   end
 
-  def have_been_tweeted(tweeted)
-    @user = tweeted
-    mail to: tweeted.email, subject: "You've been mentioned!"
+  def have_been_tweeted(user, tweeter)
+    @user = user
+    @tweeter = tweeter
+    mail to: user.email, subject: "You've been mentioned!"
   end
 end

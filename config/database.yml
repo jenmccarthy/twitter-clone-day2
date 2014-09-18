@@ -1,0 +1,11 @@
+default: &default
+  adapter: postgresql
+
+development:
+  <<: *default
+  database: status_app_development
+
+test:
+  <<: *default
+  database: status_app_test
+

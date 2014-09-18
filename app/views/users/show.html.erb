@@ -1,0 +1,10 @@
+<h1>Profile Page for <%= @user.email %></h1>
+
+<div class="statuses">
+  <ul id="tweet-list">
+    <%= render @user.tweets %>
+  </ul>
+</div>
+
+<%= link_to "Home", tweets_path, :class => 'btn btn-primary' %>
+<%= link_to "Add Tweet", new_tweet_path, :id => 'new_tweet', :class => 'btn btn-primary', remote: true %>

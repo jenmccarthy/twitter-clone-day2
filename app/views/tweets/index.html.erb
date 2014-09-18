@@ -1,2 +1,5 @@
 <h2>What's App</h2>
 
+<% if current_user != nil %>
+  <%= link_to "Add Tweet", new_tweet_path, :id => 'new_tweet', :class => 'btn btn-primary', remote: true %>
+<% end %>

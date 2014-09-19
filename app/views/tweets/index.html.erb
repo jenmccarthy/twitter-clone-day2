@@ -1,13 +1,25 @@
-<h2>What's App</h2>
-
-<ul>
-  <% Tweet.all.each do |tweet| %>
-    <li><%= tweet.status %></li>
-  <% end %>
-</ul>
-
-<% if current_user != nil %>
-  <%= link_to "Add Tweet", new_tweet_path, :id => 'new_tweet', :class => 'btn btn-primary', remote: true %>
-<% end %>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <h3>Recent Tweets:</h3>
+          <ul>
+            <% Tweet.all.each do |tweet| %>
+               <li><%= tweet.status %></li>
+            <% end %>
+          </ul>
+          <% if current_user != nil %>
+            <%= link_to "Add Tweet", new_tweet_path, :id => 'new_tweet', :class => 'btn btn-primary', remote: true %>
+          <% end %>
+        </div>
+        <div class="col-sm-6">
+          <h3>Your Followed Users Tweets:</h3>
+          <% if current_user != nil && current_user.relationships.empty? == false %>
+            <% current_user.relationships.each do |follower| %>
+            <%= follower.status %>
+            <% end %>
+          <% end %>
+        </div><!-- list all current_user's followed tweets -->
+    </div>
+</div>
 
 

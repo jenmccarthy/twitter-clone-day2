@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :tweets
+  has_many :relationships, foreign_key: "follower_id"
 
   after_create :send_welcome_message
 

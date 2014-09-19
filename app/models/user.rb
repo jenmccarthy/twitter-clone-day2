@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
     UserMailer.signup_confirmation(self).deliver
   end
 
+  def self.find_by_search(query)
+    results = User.where('email LIKE ?', "%#{query}%" )
+  end
+
 end

@@ -8,15 +8,20 @@
       </ul>
     </div>
   </div>
-
-  <form action="/" method="get" class="form-group">
-    <div class="col-sm-4">
-      <input name="search[query]" type="text" class="form-control" placeholder="search users">
-    </div>
-    <div class="col-sm-2">
-      <button class="btn btn-primary">Search</button>
-    </div>
-  </form>
+  <div class='col-sm-6'>
+    <%= form_tag(user_path(@user), :method => 'get', id: 'search-form') do %>
+      <div class="form-group">
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "search", :class => "btn btn-primary" %>
+      </div>
+    <% end %>
+    <% @results = User.find_by_search(params[:search]) %>
+    <ul>
+      <% @results.each do |result| %>
+        <li><%= result.email %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
 

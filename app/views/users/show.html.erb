@@ -17,8 +17,16 @@
     <% end %>
     <% @results = User.find_by_search(params[:search]) %>
     <ul>
-      <% @results.each do |result| %>
-        <li><%= result.email %></li>
+      <% if params[:search] != nil %>
+        <% @results.each do |result| %>
+          <li id='follow_<%= result.id %>'>
+              <%= result.email %>
+              <%= form_for [result, Relationship.new], remote: true do |f| %>
+                <%= f.hidden_field :followed_id, :value => result.id %>
+                <%= f.submit "Follow" %>
+              <% end %>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   </div>
